@@ -4,6 +4,7 @@ import re
 import struct
 import os
 from collections import Counter
+import requests
 
 # =========================================================
 # CONFIGURATION
