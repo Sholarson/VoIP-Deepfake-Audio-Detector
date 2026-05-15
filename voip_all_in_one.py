@@ -13,7 +13,7 @@ import requests
 TSHARK_PATH = "tshark"
 INTERFACE = "wlp193s0"
 CAPTURE_FILE = "capture.pcap"
-CAPTURE_DURATION = 30
+CAPTURE_DURATION = 15
 OPUS_PAYLOAD_TYPE = 96
 
 # =========================================================
@@ -321,3 +321,34 @@ else:
 
 print("\nDONE.")
 print("Remote person's Opus voice extracted successfully.")
+
+import requests
+
+# Your ngrok public URL
+url = "https://slip-viable-empathy.ngrok-free.dev/predict"
+
+# Audio file path
+audio_path = "remote.wav"
+
+try:
+
+    with open(audio_path, "rb") as audio_file:
+
+        files = {
+            "file": audio_file
+        }
+
+        print("\nSending audio for prediction...")
+
+        response = requests.post(url, files=files)
+
+    print("\nResponse Status:")
+    print(response.status_code)
+
+    print("\nPrediction Result:")
+    print(response.json())
+
+except Exception as e:
+
+    print("Error:")
+    print(e)
